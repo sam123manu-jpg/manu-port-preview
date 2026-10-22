@@ -40,10 +40,11 @@
         d.classList.add('no-city');
         if (reason === 'webgl') d.classList.add('no-webgl');
       };
-      setTimeout(function () { window.__cityFallback('slow'); }, 4000);
+      // no title card after ~4 s means the page's script didn't start (old browser, blocked script)
+      setTimeout(function () { if (!window.__titleShown) window.__cityFallback('slow'); }, 4000);
     </script>
-    <script type="module" crossorigin src="./assets/main-BLgYeeZY.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/main-DilvOrw0.css">
+    <script type="module" crossorigin src="./assets/main-B_AZ5t9z.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/main-DA_xF8Au.css">
     <script>window.__pitch = {"slug":"example","company":"Example Co","role":"Senior Product Manager, AI Platform","greeting":"Hi Example Co team, I made you a stop in my city. Here's a short look at your product, and why I'd like to build it with you.","sections":[{"kind":"flow","title":"The flow I looked at","text":"Example Co's onboarding: sign-up, connecting a first data source, and the first dashboard. (Fictional example text.)"},{"kind":"issue","title":"One issue I found","text":"After connecting a data source, new users land on an empty dashboard with no next step. (Fictional example text.)","image":{"file":"og.jpg","alt":"Example screenshot (placeholder image)"}},{"kind":"fix","title":"My proposed fix","text":"Open the first dashboard pre-filled from the connected source, with one suggested chart and a 'make it yours' prompt. (Fictional example text.)","link":{"label":"See the prototype","href":"https://example.com"}},{"kind":"why","title":"Why it matters for the role","text":"Activation in the first session is the job of this role. I've done this before: one-field sign-up at GMNG cut sign-up drop-off by about 60%. (Fictional company; the GMNG fact is real.)"}],"suggestedCase":"one-field-signup"};</script>
   </head>
   <body>
@@ -133,12 +134,6 @@
 <footer class="cvs-foot"><h2>Contact</h2><p><a href="mailto:sam123.manu@gmail.com">sam123.manu@gmail.com</a> · <a href="https://www.linkedin.com/in/pratapmanusingh" rel="noopener">LinkedIn</a> · <a href="Manu_Pratap_Singh_CV.pdf">Download CV (PDF)</a></p></footer>
 </main>
     <div id="app">
-      <canvas id="scene" aria-hidden="true"></canvas>
-      <div id="tint" aria-hidden="true"></div>
-      <div id="eras" aria-label="The five chapters"></div>
-      <div id="labels" role="list" aria-label="Buildings in the city"></div>
-      <div id="badges" aria-hidden="true"></div>
-
       <header id="topbar">
         <button class="brand" id="btn-home" title="Back to the start">
           <span class="brand-mark" aria-hidden="true"></span>
@@ -155,8 +150,14 @@
           <button id="btn-claim" class="primary" title="Email, LinkedIn or my CV">Contact me</button>
         </div>
       </header>
-
       <section id="title" aria-label="Introduction" hidden></section>
+      <section id="story" aria-label="The story, chapter by chapter" hidden></section>
+      <canvas id="scene" aria-hidden="true"></canvas>
+      <div id="tint" aria-hidden="true"></div>
+      <div id="eras" aria-label="The five chapters"></div>
+      <div id="labels" role="group" aria-label="Buildings in the city"></div>
+      <div id="badges" aria-hidden="true"></div>
+
       <button id="btn-buildings" type="button">Buildings</button>
       <div id="ai-legend" role="status" hidden>
         <span><span class="ai-chip built">✦ Built with AI</span> I used AI tools to build or run it</span>
@@ -164,7 +165,6 @@
         <a href="how-built/">How I built it with AI ›</a>
         <button type="button" data-ai-off>Done</button>
       </div>
-      <section id="story" aria-label="The story, chapter by chapter" hidden></section>
 
       <aside id="panel" aria-live="polite" hidden>
         <button class="panel-close" id="panel-close" aria-label="Close">×</button>

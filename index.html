@@ -40,10 +40,11 @@
         d.classList.add('no-city');
         if (reason === 'webgl') d.classList.add('no-webgl');
       };
-      setTimeout(function () { window.__cityFallback('slow'); }, 4000);
+      // no title card after ~4 s means the page's script didn't start (old browser, blocked script)
+      setTimeout(function () { if (!window.__titleShown) window.__cityFallback('slow'); }, 4000);
     </script>
-    <script type="module" crossorigin src="./assets/main-BLgYeeZY.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/main-DilvOrw0.css">
+    <script type="module" crossorigin src="./assets/main-B_AZ5t9z.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/main-DA_xF8Au.css">
   </head>
   <body>
     <main id="cv-static" aria-labelledby="cvs-name">
@@ -132,12 +133,6 @@
 <footer class="cvs-foot"><h2>Contact</h2><p><a href="mailto:sam123.manu@gmail.com">sam123.manu@gmail.com</a> · <a href="https://www.linkedin.com/in/pratapmanusingh" rel="noopener">LinkedIn</a> · <a href="Manu_Pratap_Singh_CV.pdf">Download CV (PDF)</a></p></footer>
 </main>
     <div id="app">
-      <canvas id="scene" aria-hidden="true"></canvas>
-      <div id="tint" aria-hidden="true"></div>
-      <div id="eras" aria-label="The five chapters"></div>
-      <div id="labels" role="list" aria-label="Buildings in the city"></div>
-      <div id="badges" aria-hidden="true"></div>
-
       <header id="topbar">
         <button class="brand" id="btn-home" title="Back to the start">
           <span class="brand-mark" aria-hidden="true"></span>
@@ -154,8 +149,14 @@
           <button id="btn-claim" class="primary" title="Email, LinkedIn or my CV">Contact me</button>
         </div>
       </header>
-
       <section id="title" aria-label="Introduction" hidden></section>
+      <section id="story" aria-label="The story, chapter by chapter" hidden></section>
+      <canvas id="scene" aria-hidden="true"></canvas>
+      <div id="tint" aria-hidden="true"></div>
+      <div id="eras" aria-label="The five chapters"></div>
+      <div id="labels" role="group" aria-label="Buildings in the city"></div>
+      <div id="badges" aria-hidden="true"></div>
+
       <button id="btn-buildings" type="button">Buildings</button>
       <div id="ai-legend" role="status" hidden>
         <span><span class="ai-chip built">✦ Built with AI</span> I used AI tools to build or run it</span>
@@ -163,7 +164,6 @@
         <a href="how-built/">How I built it with AI ›</a>
         <button type="button" data-ai-off>Done</button>
       </div>
-      <section id="story" aria-label="The story, chapter by chapter" hidden></section>
 
       <aside id="panel" aria-live="polite" hidden>
         <button class="panel-close" id="panel-close" aria-label="Close">×</button>
